@@ -51,7 +51,6 @@ public class MultipartUtility {
 		httpConn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
 		outputStream = httpConn.getOutputStream();
 		writer = new PrintWriter(new OutputStreamWriter(outputStream, charset), true);
-
 	}
 
 	/**
