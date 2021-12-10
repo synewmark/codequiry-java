@@ -75,8 +75,8 @@ public class CodequirySDK {
 	}
 
 	public CheckStatus startCheck(Integer checkId) {
-		Map<String, Integer> params = new HashMap<>();
-		params.put("check_id", checkId);
+		Map<String, String> params = new HashMap<>(baseHeaders);
+		params.put("check_id", checkId.toString());
 		String json;
 		try {
 			json = new MultipartUtility(API_BASE_URL + "check/start", ENCODING, baseHeaders).finish();
@@ -87,8 +87,8 @@ public class CodequirySDK {
 	}
 
 	public Check getCheck(Integer checkId) {
-		Map<String, Integer> params = new HashMap<>();
-		params.put("check_id", checkId);
+		Map<String, String> params = new HashMap<>(baseHeaders);
+		params.put("check_id", checkId.toString());
 		String json;
 		try {
 			json = new MultipartUtility(API_BASE_URL + "check/get", ENCODING, baseHeaders).finish();
@@ -99,8 +99,8 @@ public class CodequirySDK {
 	}
 
 	public Overview getOverview(Integer checkId) {
-		Map<String, Integer> params = new HashMap<>();
-		params.put("check_id", checkId);
+		Map<String, String> params = new HashMap<>(baseHeaders);
+		params.put("check_id", checkId.toString());
 		String json;
 		try {
 			json = new MultipartUtility(API_BASE_URL + "check/overview", ENCODING, baseHeaders).finish();
@@ -111,8 +111,8 @@ public class CodequirySDK {
 	}
 
 	public SubmissionResults getResults(Integer checkId, String submissionId) {
-		Map<String, Object> params = new HashMap<>();
-		params.put("check_id", checkId);
+		Map<String, String> params = new HashMap<>(baseHeaders);
+		params.put("check_id", checkId.toString());
 		params.put("submission_id", submissionId);
 		String json;
 		try {
