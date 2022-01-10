@@ -30,9 +30,10 @@ public class CodequirySDK {
 	private static final String API_UPLOAD_URL = "https://codequiry.com/api/v1/check/upload";
 	private static final String SOCKETS_BASE_URL = "https://api.codequiry.com/";
 
-	private final ObjectMapper objectMapper = new ObjectMapper()
+	private static final ObjectMapper objectMapper = new ObjectMapper()
 			.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-			.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+//			.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+			.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CAMEL_CASE);
 
 	private final Map<String, String> baseHeaders = new HashMap<String, String>();
 
@@ -62,12 +63,15 @@ public class CodequirySDK {
 	}
 
 	public Check createCheck(String checkName, String lang) {
-		Map<String, String> params = new HashMap<>(baseHeaders);
-		params.put("name", checkName);
-		params.put("language", lang);
+		Map<String, String> headers = new HashMap<>(baseHeaders);
+		headers.put("Accept", "*/*");
+		headers.put("name", checkName);
+		headers.put("language", lang);
 		String json;
 		try {
-			json = new MultipartUtility(API_BASE_URL + "check/create", ENCODING, params).finish();
+			json = new MultipartUtility(
+					String.format("https://codequiry.com/api/v1/check/create?name=%s&language=%s", checkName, lang),
+					ENCODING, headers).finish();
 		} catch (IOException e) {
 			throw new CodequiryApiException(e);
 		}
@@ -79,7 +83,9 @@ public class CodequirySDK {
 		params.put("check_id", checkId.toString());
 		String json;
 		try {
-			json = new MultipartUtility(API_BASE_URL + "check/start", ENCODING, baseHeaders).finish();
+			json = new MultipartUtility(
+					String.format("https://codequiry.com/api/v1/check/start?check_id=%d?estimate_cost=1", checkId),
+					ENCODING, baseHeaders).finish();
 		} catch (IOException e) {
 			throw new CodequiryApiException(e);
 		}
@@ -103,7 +109,9 @@ public class CodequirySDK {
 		params.put("check_id", checkId.toString());
 		String json;
 		try {
-			json = new MultipartUtility(API_BASE_URL + "check/overview", ENCODING, baseHeaders).finish();
+			json = new MultipartUtility(
+					String.format("https://codequiry.com/api/v1/check/overview?check_id=%d", checkId), ENCODING,
+					baseHeaders).finish();
 		} catch (IOException e) {
 			throw new CodequiryApiException(e);
 		}
@@ -123,6 +131,7 @@ public class CodequirySDK {
 		return mapJsonToObject(json, SubmissionResults.class);
 	}
 
+	// untested!!
 	public void checkListen(String jobId, MessageHandler handler) {
 		try {
 			Socket socket = IO.socket(SOCKETS_BASE_URL);
