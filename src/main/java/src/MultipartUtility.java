@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -18,6 +19,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Map;
+import java.util.Scanner;
 
 public class MultipartUtility {
 	private final String boundary;
@@ -112,7 +114,7 @@ public class MultipartUtility {
 
 		// checks server's status code first
 		int status = httpConn.getResponseCode();
-		if (status == HttpURLConnection.HTTP_OK) {
+		if (status >= 200 && status < 300) {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(httpConn.getInputStream()));
 			String line = null;
 			while ((line = reader.readLine()) != null) {
@@ -123,8 +125,12 @@ public class MultipartUtility {
 		} else {
 			String errorInfo = "";
 			if (httpConn != null) {
-				java.util.Scanner s = new java.util.Scanner(httpConn.getErrorStream()).useDelimiter("\\A");
-				errorInfo = s.hasNext() ? s.next() : "";
+				InputStream is = httpConn.getErrorStream();
+				if (is != null) {
+					Scanner s = new Scanner(is).useDelimiter("\\A");
+					errorInfo = s.hasNext() ? s.next() : "";
+					s.close();
+				}
 			}
 			throw new IOException("Server returned error status: " + status + " " + errorInfo);
 		}
