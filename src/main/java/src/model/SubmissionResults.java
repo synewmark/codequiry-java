@@ -4,76 +4,85 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SubmissionResults {
-    private Submission submission;
-    private Double avg;
-    private Double max;
-    private Double min;
-    private List<PeerMatch> peerMatches = new ArrayList<>();
-    private List<Object> otherMatches = new ArrayList<>();
-    private List<Submission> relatedSubmissions = new ArrayList<>();
-    private List<SubmissionFile> submissionFiles = new ArrayList<>();
+	private String overviewURL;
+	private Submission submission;
+	private Double avg;
+	private Double max;
+	private Double min;
+	private List<PeerMatch> peerMatches = new ArrayList<>();
+	private List<Object> otherMatches = new ArrayList<>();
+	private List<Submission> relatedSubmissions = new ArrayList<>();
+	private List<SubmissionFile> submissionFiles = new ArrayList<>();
 
-    public Submission getSubmission() {
-        return submission;
-    }
+	public String getOverviewURL() {
+		return overviewURL;
+	}
 
-    public void setSubmission(Submission submission) {
-        this.submission = submission;
-    }
+	public void setOverviewURL(String overviewURL) {
+		this.overviewURL = overviewURL;
+	}
 
-    public Double getAvg() {
-        return avg;
-    }
+	public Submission getSubmission() {
+		return submission;
+	}
 
-    public void setAvg(Double avg) {
-        this.avg = avg;
-    }
+	public void setSubmission(Submission submission) {
+		this.submission = submission;
+	}
 
-    public Double getMax() {
-        return max;
-    }
+	public Double getAvg() {
+		return avg;
+	}
 
-    public void setMax(Double max) {
-        this.max = max;
-    }
+	public void setAvg(Double avg) {
+		this.avg = avg;
+	}
 
-    public Double getMin() {
-        return min;
-    }
+	public Double getMax() {
+		return max;
+	}
 
-    public void setMin(Double min) {
-        this.min = min;
-    }
+	public void setMax(Double max) {
+		this.max = max;
+	}
 
-    public List<PeerMatch> getPeerMatches() {
-        return peerMatches;
-    }
+	public Double getMin() {
+		return min;
+	}
 
-    public void setPeerMatches(List<PeerMatch> peerMatches) {
-        this.peerMatches = peerMatches;
-    }
+	public void setMin(Double min) {
+		this.min = min;
+	}
 
-    public List<Object> getOtherMatches() {
-        return otherMatches;
-    }
+	public List<PeerMatch> getPeerMatches() {
+		return peerMatches;
+	}
 
-    public void setOtherMatches(List<Object> otherMatches) {
-        this.otherMatches = otherMatches;
-    }
+	public void setPeerMatches(List<PeerMatch> peerMatches) {
+		this.peerMatches = peerMatches;
+	}
 
-    public List<Submission> getRelatedSubmissions() {
-        return relatedSubmissions;
-    }
+	public List<Object> getOtherMatches() {
+		return otherMatches;
+	}
 
-    public void setRelatedSubmissions(List<Submission> relatedSubmissions) {
-        this.relatedSubmissions = relatedSubmissions;
-    }
+	public void setOtherMatches(List<Object> otherMatches) {
+		this.otherMatches = otherMatches;
+	}
 
-    public List<SubmissionFile> getSubmissionFiles() {
-        return submissionFiles;
-    }
+	public List<Submission> getRelatedSubmissions() {
+		return relatedSubmissions;
+	}
 
-    public void setSubmissionFiles(List<SubmissionFile> submissionFiles) {
-        this.submissionFiles = submissionFiles;
-    }
+	public void setRelatedSubmissions(List<Submission> relatedSubmissions) {
+		this.relatedSubmissions = relatedSubmissions;
+	}
+
+	public List<SubmissionFile> getSubmissionFiles() {
+		return submissionFiles;
+	}
+
+	public void setSubmissionFiles(List<SubmissionFile> submissionFiles) {
+		this.submissionFiles = submissionFiles;
+	}
 }
