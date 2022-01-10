@@ -32,6 +32,9 @@ public class CodequirySDK {
 
 	private static final ObjectMapper objectMapper = new ObjectMapper()
 			.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+
+			// naming convention is inconsistent
+			// a robust solution would require many annotations or a custom deserializer
 //			.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
 			.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CAMEL_CASE);
 
