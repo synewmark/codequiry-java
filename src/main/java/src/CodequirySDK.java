@@ -73,8 +73,8 @@ public class CodequirySDK {
 		String json;
 		try {
 			json = new MultipartUtility(
-					String.format("https://codequiry.com/api/v1/check/create?name=%s&language=%s", checkName, lang),
-					ENCODING, headers).finish();
+					String.format("%scheck/create?name=%s&language=%s", API_BASE_URL, checkName, lang), ENCODING,
+					headers).finish();
 		} catch (IOException e) {
 			throw new CodequiryApiException(e);
 		}
@@ -87,8 +87,8 @@ public class CodequirySDK {
 		String json;
 		try {
 			json = new MultipartUtility(
-					String.format("https://codequiry.com/api/v1/check/start?check_id=%d?estimate_cost=1", checkId),
-					ENCODING, baseHeaders).finish();
+					String.format("%scheck/start?check_id=%d?estimate_cost=1", API_BASE_URL, checkId), ENCODING,
+					baseHeaders).finish();
 		} catch (IOException e) {
 			throw new CodequiryApiException(e);
 		}
@@ -112,8 +112,7 @@ public class CodequirySDK {
 		params.put("check_id", checkId.toString());
 		String json;
 		try {
-			json = new MultipartUtility(
-					String.format("https://codequiry.com/api/v1/check/overview?check_id=%d", checkId), ENCODING,
+			json = new MultipartUtility(String.format("%s/check/overview?check_id=%d", API_BASE_URL, checkId), ENCODING,
 					baseHeaders).finish();
 		} catch (IOException e) {
 			throw new CodequiryApiException(e);
@@ -155,7 +154,7 @@ public class CodequirySDK {
 		Map<String, String> headers = new HashMap<>(baseHeaders);
 		String json;
 		try {
-			MultipartUtility httpPost = new MultipartUtility(API_UPLOAD_URL, "UTF-8", headers);
+			MultipartUtility httpPost = new MultipartUtility(API_UPLOAD_URL, ENCODING, headers);
 			httpPost.addFormField("check_id", checkId.toString());
 			httpPost.addFilePart("file", file);
 			json = httpPost.finish();
