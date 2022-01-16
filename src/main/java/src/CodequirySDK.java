@@ -167,7 +167,6 @@ public class CodequirySDK {
 
 	private <T> T mapJsonToObject(String json, Class<T> clazz) {
 		try {
-			System.out.println(json);
 			return objectMapper.readValue(json, clazz);
 		} catch (IOException e) {
 			throw new CodequiryApiException("Error parsing json response", e);
