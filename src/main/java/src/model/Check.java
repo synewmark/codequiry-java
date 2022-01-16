@@ -5,8 +5,18 @@ public class Check {
 	private String name;
 	private String createdAt;
 	private String updatedAt;
+	private int course_id;
+
 	private int statusId;
 	private int jobId;
+
+	public int getCourse_id() {
+		return course_id;
+	}
+
+	public void setCourse_id(int course_id) {
+		this.course_id = course_id;
+	}
 
 	public int getId() {
 		return id;
