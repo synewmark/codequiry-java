@@ -112,7 +112,7 @@ public class CodequirySDK {
 		params.put("check_id", checkId.toString());
 		String json;
 		try {
-			json = new MultipartUtility(String.format("%s/check/overview?check_id=%d", API_BASE_URL, checkId), ENCODING,
+			json = new MultipartUtility(String.format("%scheck/overview?check_id=%d", API_BASE_URL, checkId), ENCODING,
 					baseHeaders).finish();
 		} catch (IOException e) {
 			throw new CodequiryApiException(e);
@@ -167,6 +167,7 @@ public class CodequirySDK {
 
 	private <T> T mapJsonToObject(String json, Class<T> clazz) {
 		try {
+			System.out.println(json);
 			return objectMapper.readValue(json, clazz);
 		} catch (IOException e) {
 			throw new CodequiryApiException("Error parsing json response", e);
